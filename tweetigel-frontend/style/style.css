@@ -9,6 +9,13 @@
     transition: box-shadow var(--pico-transition);
 }
 
+kbd {
+    align-content: center;
+    background-color: var(--pico-background-color);
+    color: var(--pico-primary);
+    padding-left: 2%;
+}
+
 nav > ul > div {
     display: flex;
 }

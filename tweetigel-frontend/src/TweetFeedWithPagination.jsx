@@ -23,6 +23,7 @@ function TweetFeedWithPagination({username, viewingUsername, setViewingUsername,
     }
 
     useEffect(() => {
+
         fetch(fetchListEndpoint + "page=" + pageNum.toString(), {
             method:"GET",
             credentials: 'include'
@@ -46,7 +47,9 @@ function TweetFeedWithPagination({username, viewingUsername, setViewingUsername,
                         return response.json()
                     }
                 }).then(count => {
-                    setMaxPageNum(Math.floor(count / 20))
+                    setMaxPageNum(Math.max(0, Math.ceil(count / 20) - 1));
+                    console.log("Post counts: " + count)
+                    console.log("Max pages: " + maxPageNum);
                 })
         })
     },[api, changed, pageNum, viewingUsername, hashtag, searchTerm])
@@ -96,6 +99,7 @@ function TweetFeedWithPagination({username, viewingUsername, setViewingUsername,
                     <button className="outline" onClick={lastPage}>❮ Last Page</button>
                     <button className="outline" onClick={nextPage}>Next Page ❯</button>
                 </div>
+                <kbd className="outline"><small> Page {pageNum + 1} of {maxPageNum + 1}</small></kbd>
                 <ul>
                     {feed.map(post => (
                         <Post key={post.id} post={post} setView={setView} username={username}

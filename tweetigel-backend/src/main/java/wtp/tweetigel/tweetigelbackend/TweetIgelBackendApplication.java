@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class tweetIgelBackendApplication {
+public class TweetIgelBackendApplication {
     public static void main(String[] args) {
-        SpringApplication.run(tweetIgelBackendApplication.class, args);
+        SpringApplication.run(TweetIgelBackendApplication.class, args);
     }
 }

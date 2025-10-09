@@ -98,7 +98,7 @@ public class UserController {
     // Need to be changed to use session
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(
-            value="/changePassword",
+            value="/password",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -108,7 +108,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(
-            value="/getProfile/{username}",
+            value="/profile/{username}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public UserProfileDto getUserProfile(HttpServletRequest request,
@@ -118,7 +118,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(
-            value="/updateProfile",
+            value="/profile",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

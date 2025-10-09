@@ -6,9 +6,11 @@ function Editor({endpoint, type, onSend}){
     const api = useContext(API)
     const content = useRef(undefined)
     const [sent, setSent] = useState(false)
+    const [isLengthValid, setIsLengthValid] = useState(true)
 
     useEffect(() => {
         setSent(false)
+        setIsLengthValid(true)
     }, [])
 
     function send(){
@@ -16,6 +18,11 @@ function Editor({endpoint, type, onSend}){
         if(content.current.value === "" || content.current.value===undefined){
             alert("Post can't be empty!")
             return
+        }
+        if(content.current.value.length > 140) {
+            setIsLengthValid(!isLengthValid);
+            setTimeout(() => setIsLengthValid(true), 3000);
+            return;
         }
         const payload = {content:content.current.value}
         fetch(`${api}${endpoint}`, { // Interpolation Required
@@ -45,7 +52,17 @@ function Editor({endpoint, type, onSend}){
                              placeholder="Enter content here." ref={content}></textarea>
                             <small id="box-helper">Success!</small>
                     </ul>
-                    :  <ul>
+                    : !isLengthValid ?
+                            <ul>
+                              <textarea
+                                  name="box"
+                                  aria-invalid="true"
+                                  aria-describedby="invalid-helper"
+                                  placeholder="Enter content here."
+                                  ref={content}></textarea>
+                                <small id="invalid-helper">Content exceeds max length of 140 characters!</small>
+                            </ul>
+                        :  <ul>
                             <textarea placeholder="Enter content here." ref={content}></textarea>
                         </ul>
                 }

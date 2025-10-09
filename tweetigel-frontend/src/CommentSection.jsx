@@ -5,7 +5,7 @@ import {API} from "./Context.js";
 function CommentSection({commentsCount, postId, onCommentAdded}){
     const api = useContext(API)
     const [comments, setComments] = useState([]);
-    const [showEiditor, setShowEditor] = useState(false);
+    const [showEditor, setShowEditor] = useState(false);
 
     function getComments(){
         fetch(api+"/post/" + postId + "/comments", {
@@ -28,7 +28,7 @@ function CommentSection({commentsCount, postId, onCommentAdded}){
     }
 
     function displayEditor(){
-        setShowEditor(!showEiditor)
+        setShowEditor(!showEditor)
     }
 
     return <>
@@ -37,10 +37,10 @@ function CommentSection({commentsCount, postId, onCommentAdded}){
                 <u>{commentsCount} Comment{commentsCount>1?"s":""}</u>
             </summary>
             <hr />
-            <button className="outline" onClick={displayEditor}>Leave a Comment {showEiditor? "↓" :"→"}</button>
-            {showEiditor === true?
+            <button className="outline" onClick={displayEditor}>Leave a Comment {showEditor? "↓" :"→"}</button>
+            {showEditor === true?
                 <div className="flex">
-                    <Editor endpoint={`/post/${postId}/addComment`} type={`Comment`} onSend={update}></Editor>
+                    <Editor endpoint={`/post/${postId}/comment`} type={`Comment`} onSend={update}></Editor>
                 </div>
                 : <></>
             }

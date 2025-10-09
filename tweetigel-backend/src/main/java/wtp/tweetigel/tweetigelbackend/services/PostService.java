@@ -21,10 +21,7 @@ import wtp.tweetigel.tweetigelbackend.repositories.PostRepository;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -176,7 +173,9 @@ public class PostService {
 
     public int getPostsCountForFeed(HttpServletRequest request){
         User user = authService.getAuthenticatedUser(request);
-        return postRepository.countPostByAuthorIsIn(user.getFollowed());
+        Set<User> authors = new HashSet<>(user.getFollowed());
+        authors.add(user);
+        return postRepository.countPostByAuthorIsIn(authors);
     }
 
     @Transactional

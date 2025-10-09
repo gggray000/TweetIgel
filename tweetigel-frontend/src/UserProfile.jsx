@@ -15,7 +15,7 @@ function UserProfile({ username, viewingUsername, setViewingUsername, setView, s
     const [followed, setFollowed] = useState(undefined);
 
     useEffect(() => {
-        fetch(api + "/getProfile/" + viewingUsername.toString(),{
+        fetch(api + "/profile/" + viewingUsername.toString(),{
             method:"GET",
             credentials: 'include'
         }).then(response => {
@@ -57,7 +57,7 @@ function UserProfile({ username, viewingUsername, setViewingUsername, setView, s
             email: email.current.value,
             biography: biography.current.value
         }
-        fetch(api + "/updateProfile",{
+        fetch(api + "/profile",{
             method: "PUT",
             headers: contentTypeJson(),
             body: JSON.stringify(payload),

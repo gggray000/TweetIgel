@@ -88,7 +88,7 @@ public class PostController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping(value = "/post/{id}/addComment",
+    @PostMapping(value = "/post/{id}/comment",
                  consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addComment(@PathVariable("id") Long postId,
                             HttpServletRequest request,
