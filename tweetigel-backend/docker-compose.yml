@@ -2,7 +2,7 @@
 services:
   db:
     image: mariadb
-    restart: always
+    restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: asdf1234
     volumes:
@@ -11,7 +11,7 @@ services:
       - "3306:3306"
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     ports:
       - "7070:8080"
     depends_on:
